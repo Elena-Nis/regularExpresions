@@ -18,7 +18,6 @@ public static String javaVariable() {
 	return regex;
 }
 public static String zero_300() {
-	//TODO
 	//string contains number from 0 - 300; leading zeros are disallowed
 	String regex = "[1-9]\\d?|[1-2]\\d\\d|300|0"; 
 	//1й \ - для экранирования специального символа, т.е. для исключения 
@@ -37,11 +36,58 @@ public static String zero_300() {
 	 return regex;
 }
 public static String ipOctet() {
-	String regex="\\d\\d?|[0-1]\\d\\d|2[0-4]\\d|2[0-5][0-5]";
+	//String regex="\\d\\d?|[0-1]\\d\\d|2[0-4]\\d|2[0-5][0-5]";
+	String regex="(\\d\\d?|[0-1]\\d{2}|2[0-4]\\d|25[0-5])";
+	//String regex = "[01]?\\d?{0,2}|2([0-4]\\d|5[0-5])";
+	//regex = "[01]?\\d{1,2}|2([0-4]\\d|5[0-5])";
  	return regex;
 }
 public static String mobileIsraelPhone() {
-	String regex="((\\+972-)|0)[57]\\d\\-\\d{3}\\-\\d{2}\\-\\d{2}";
+	String regex=".*((\\+972-)|0)[57]\\d\\-\\d{3}\\-\\d{2}\\-\\d{2}";
 	return regex;
+}
+
+public static String ipV4Adress () {
+	String ipOctetExpr=ipOctet();
+	//return String.format("%s(\\.%s){3}", ipOctetExpr,ipOctetExpr);
+	return String.format("%1$s(\\.%1$s){3}", ipOctetExpr);
+}
+public static String simpleArithmeticExpressions () {
+	 	//TODO
+	//operations only binary = - * /
+	//operands only integer numbers
+	//no brackets
+	String operand = integerNumberExp();
+	String operation = operationExp();
+	
+	//return String.format("%1$s(%2$s%1$s)*", operand, operation);
+	return String.format("%1$s(%2$s%1$s)*", operand, operation);
+	
+}
+private static String operationExp() {
+	 
+	return "[-+*/]";
+}
+private static String integerNumberExp() {
+	
+	return "(\\s*\\d+\\s*)";
+}
+public static String arithmeticExpression() {
+	String operandBrackets = operandBrackets();
+	String operationBrackets = operationBrackets();
+	return String.format("%1$s(%2$s%1$s)*", operandBrackets, operationBrackets);
+
+}
+private static String operationBrackets() {
+		return "[-+*/]";
+}
+private static String operandBrackets() {
+		//return "(\\s*\\(*((\\d+?(\\.\\d+?)?)|[\\p{L}_?$?]+?)\\)*\\s*)";
+	
+	return "(\\s*\\(*((\\d+?(\\.\\d+?)?)|([A-Za-z$][\\w$]*|_[\\w$]+?)|_{2})\\)*\\s*)";
+		
+		//return "(\\s*\\(*((\\d+?(\\.\\d+?)?)|[^_]+?[_*$*]|_{2})\\)*\\s*)";
+		// return "(\\s*\\(*((\\d+?(\\.\\d+?)?)|([\\p{L}+_?$?]+?)|(_{2})\\s*)\\)*\\s*)";
+		//return "(\\s*\\(*((\\d+?(\\.\\d+?)?)|(\\^[A-Za-z]+?$*_*)|_{2})\\s*\\)*\\s*)";
 }
 }
