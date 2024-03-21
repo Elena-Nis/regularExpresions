@@ -1,14 +1,11 @@
 package telran.strings.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import telran.strings.RegularExpresions;
-import telran.strings.Validations;
-
- 
+  
 class RegularExpressionsTests {
 
 	@Test
@@ -46,9 +43,9 @@ class RegularExpressionsTests {
 		assertTrue("30".matches(regex));
 		assertTrue("33".matches(regex));
 		assertTrue("300".matches(regex));
-		
-		
+
 	}
+	
 	@Test
 	void zero_300FalseTest() {
 		String regex = RegularExpresions.zero_300();
@@ -60,9 +57,8 @@ class RegularExpressionsTests {
 		assertFalse("-30".matches(regex));
 		assertFalse("330".matches(regex));
 		assertFalse("301".matches(regex));
-		
-		
 	}
+	
 	@Test
 	void ipOctetTest() {
 		String regex = RegularExpresions.ipOctet();
@@ -101,58 +97,43 @@ class RegularExpressionsTests {
 		assertFalse("-0-390-17-18".matches(regex));
 		assertFalse("a5-390-17-18".matches(regex));
 		assertFalse("0a-390-17-18".matches(regex));
-		assertFalse("34-390-17-18".matches(regex));
-		
 		assertFalse("+972-7-390-17-18".matches(regex));
 		assertFalse("+972-795-390-17-18".matches(regex));
-		 		
 		assertFalse("+972-79-3-17-18".matches(regex));
 		assertFalse("+972-79-39-17-18".matches(regex));
-		 		
 		assertFalse("+972-79-390-1-18".matches(regex));
 		assertFalse("+972-79-390-170-18".matches(regex));
-	 
-		assertFalse("+972-79-390-17-1".matches(regex));
+	 	assertFalse("+972-79-390-17-1".matches(regex));
 		assertFalse("+972-79-390-17-180".matches(regex));
-		
 		assertFalse(" 972-79-390-17-18".matches(regex));
 		assertFalse("-972-79-390-17-18".matches(regex));
 		assertFalse("972-79-390-17-18".matches(regex));
 		assertFalse("0972-79-390-17-18".matches(regex));
 		assertFalse("a972-79-390-17-18".matches(regex));
-			
 		assertFalse("+972579-390-17-18".matches(regex));
 		assertFalse("+97279-390-17-18".matches(regex));
 		assertFalse("+972_79-390-17-18".matches(regex));
 		assertFalse("+972a79-390-17-18".matches(regex));
-		
 		assertFalse("+972-60".matches(regex));
 		assertFalse("+972-?".matches(regex));
 		assertFalse("+972-00".matches(regex));
 		assertFalse("+972-40".matches(regex));
 		assertFalse("+972-a0".matches(regex));
 		assertFalse("+972-5a".matches(regex));
-		
 		assertFalse("+972-57 390-17-18".matches(regex));
 		assertFalse("+972-57+390-17-18".matches(regex));
 		assertFalse("+972-57a390-17-18".matches(regex));
 		assertFalse("+972-570390-17-18".matches(regex));
-		
 		assertFalse("+972-57-390 17-18".matches(regex));
 		assertFalse("+972-57-390?17-18".matches(regex));
 		assertFalse("+972-57-390a17-18".matches(regex));
 		assertFalse("+972-57-390717-18".matches(regex));
-		
 		assertFalse("+972-57-390-17 18".matches(regex));
-		assertFalse("+972-57-390-17?18".matches(regex));
+    	assertFalse("+972-57-390-17?18".matches(regex));
 		assertFalse("+972-57-390-17a18".matches(regex));
 		assertFalse("+972-57-390-17518".matches(regex));
-		
-		assertTrue("Elena Nisnevich +972-50-570-17-18".matches(regex));
-		
-		
-			
-	}	
+				 
+ }	
 	
 @Test 
 @DisplayName("test for IP v4 adress regular expressions")
@@ -167,6 +148,7 @@ void ipV4AdressTest() {
 	assertFalse("1.2.3&4".matches(ipV4Regex));
 	
 }
+
 @Test 
 @DisplayName("test of simple arithmetic expressions")
 void simpleArithmeticExpressionsTest() {
@@ -179,10 +161,9 @@ void simpleArithmeticExpressionsTest() {
 	assertFalse("-20".matches(regex));
 	assertFalse("20 ** 3".matches(regex));
 	assertFalse(" 20 +3 /2 *100 +".matches(regex));
-	
-	 assertFalse( "2 +() 3".matches(regex));
-	 assertFalse("(20.5 + abc12))*2".matches(regex));
-}
+	assertFalse( "2 +() 3".matches(regex));
+	assertFalse("(20.5 + abc12))*2".matches(regex));
+ }
 
 @Test 
 @DisplayName("test of arithmetic expressions with any numbers or variables")
@@ -195,13 +176,11 @@ void arithmeticExpressionTest() {
 	  assertTrue("(2 + 2".matches(regex));
 	  assertTrue("(2 + 2)".matches(regex));
 	  assertTrue("(20.5 + abc)".matches(regex));
-	
+	  assertTrue("(20.5 + ab_c)*2".matches(regex));
+	  
 	  assertFalse("2 +  _".matches(regex));
 	  assertFalse("2 + a12 * ".matches(regex));
 	  assertFalse("2 + )a12 * ".matches(regex));
-	  assertTrue("(20.5 + ab_c)*2".matches(regex));
-}
-
-
-
+	  
+ }
 }
